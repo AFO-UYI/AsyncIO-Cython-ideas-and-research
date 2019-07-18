@@ -2,21 +2,21 @@
 
 Dealing with AsyncIO on a personal proyect, some needs were raised that AsyncIO aparrently doesnt resolve. After a while, I'm diving increasingly deep about how asynchronous code works in python and whats the point with AsyncIO. Here are some notes about what I learn.
 
-1. Understanding how asynchronous code works.
-   * Pointers and First Class Functions.
-   * Function contexts and closures.
-   * Yield, StopIteration error and Yield From.
-   * Async/Await.
-   * Queues.
-   * Selector.
-   * Finally, how asynchronous code works.
-2. AsyncIO.
-   * Multithreading vs GIL.
-   * AsyncIO module.
-3. Async multithreading?
-   * An Asynchronous purpose twist.
-   * Tasks Schedulers, IPC problems and Compute Express Link.
-4. AsyncIO difficulties and Cython possibilities.
+1. [Understanding how asynchronous code works.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#1-understanding-how-asynchronous-code-works)
+   * [Pointers and First Class Functions.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#11-pointers-and-first-class-functions)
+   * [Function contexts and closures.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#12-function-contexts-and-closures)
+   * [Yield, StopIteration error and Yield From.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#13-yield-stopiteration-error-and-yield-from)
+   * [Async/Await.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#14-asyncawait)
+   * [Queues.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#15-queues)
+   * [Selector.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#16-selectors)
+   * [Finally, how asynchronous code works.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#17-finally-how-asynchronous-code-works)
+2. [AsyncIO.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#2-asyncio)
+   * [Multithreading vs GIL.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#21-multithreading-vs-gil)
+   * [AsyncIO module.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#22-asyncio-module)
+3. [Async multithreading?](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#3-async-multithreading)
+   * [An Asynchronous purpose twist.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#31-an-asynchronous-purpose-twist)
+   * [Tasks Schedulers, IPC problems and Compute Express Link.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#32-tasks-schedulers-ipc-problems-and-compute-express-link)
+4. [AsyncIO difficulties and Cython possibilities.](https://github.com/AFO-UYI/AsyncIO-Cython-ideas-and-research#4-asyncio-difficulties-and-cython-possibilities)
 
 ----
 
@@ -507,7 +507,7 @@ On the other hand, Intel and a few manufacturers are investigating in something 
 
 # 4. AsyncIO difficulties and Cython possibilities.
 
-This will be a short chapter because Im currently researching how to use properly Cython.
+This will be a short chapter because Im currently researching how to use Cython properly.
 
 As I said before, `AsyncIO` is a bit obscure about how deal with its event loop at low level. Even `AsyncIO` devs talk about be more hermetic in low level layers of the module. So make our own event loop considering all the explanations at chapter 1 could be a possibility, but makes more difficult the usability of modules like `aiohttp` because those modules are focus on `AsyncIO`.
 
