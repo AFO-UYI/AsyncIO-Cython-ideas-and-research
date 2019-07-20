@@ -33,7 +33,7 @@ In order to understand how the asynchronous concept came to be, there are a few 
 
 ## 1.1. Pointers and First Class Functions.
 
-First and foremost, I need to explain something that often seems to cause misconceptions. Variables are not valuables: they are memory address.
+First and foremost, I need to explain something that often seems to cause misconceptions. Variables are not values: they are memory addresses.
 
 If, in Python, you have a variable like  `a = 10`, `a` is not necessarily 10, it is the memory address where 10 is saved. In memory you can hold values or instructions, and you have names which hold those values’ and instructions’ memory addresses. So, in reality, you can think about functions as a data type which can be called to perform something instead of just being plain values.
 
@@ -47,7 +47,7 @@ print(a_sum(3, 4)) # prints 7
 ```
 
 
-This really does the same as usual `def` definitions in python, and can be considered a syntactic sugar. As a matter of fact, if you are in PyCharm and you copy/paste the code above, the IDE will warn you that according to pep 8 guidelines, you’re not supposed to assign a lambda function.
+This really does the same as usual `def` definitions in Python, and can be considered a syntactic sugar. As a matter of fact, if you are in PyCharm and you copy/paste the code above, the IDE will warn you that according to pep 8 guidelines, you’re not supposed to assign a lambda function.
 
 With this, I want to point out that variables really are pointers. Depending on if a variable points to a plain value or an instruction, `()` could be added or not to that pointer name in order to run those instructions. In Python, if you use a function name without `()`, it will return a string with functions attributes, one of those usually are the memory address in hexadecimal format. With value pointers you can’t get the memory address that way because you will get the printed value, but if you use `id(variable_name)` you will get the memory address of that pointer in decimal. And because pointers are pointers, you can also run `id(function_name)` and you could see it’s the same memory address as the string printed at calling `function_name`without `()`, just one is in decimal and the other is in hexadecimal.
 
@@ -437,7 +437,7 @@ Linked list are useful for working with first and last items of a list. But they
 
 A queue is a list-like which we can receive and delete (`pop()`) the first item and add new items at the end of the list. A deque, for instance, is a list-like which we can receive, delete and insert items at the end or start of a list.
 
-Those capabilities of queues makes it ideal for algorithms with stacked data. Even if those stack are treated with FIFO (First In, First Out) or LIFO (Last In, First Out).
+Those capabilities of queues makes them ideal for algorithms with stacked data. Even if those stack are treated with FIFO (First In, First Out) or LIFO (Last In, First Out).
 
 This will be really important for async management. Spoiler alert: the event loop is a queue.
 
@@ -463,7 +463,7 @@ def read_socket(socket):
     # the code to read a message from socket
 
 
-selector.register( socket, EVENT_READ, read_socket) # when socket is ready to read, will be added a to a list of ready sockets.
+selector.register( socket, EVENT_READ, read_socket) # when socket is ready to read, will be added to a list of ready sockets.
 
 while True:
     events_ready = selector.select()    
@@ -565,7 +565,7 @@ On the other hand, Intel and a few manufacturers are investigating something the
 
 I’m currently researching how to use Cython properly, so this may be a short chapter for the time being. 
 
-As mentioned, `AsyncIO` is a bit obscure about to how to deal with its event loop at the low level. Even `AsyncIO` devs talk about being more hermetic in low level layers of the module. So while making our own event loop considering all the explanations at chapter 1 could be a possibility, it may make it more difficult for the usability of modules like `aiohttp` because those modules are focused on `AsyncIO`.
+As mentioned, `AsyncIO` is a bit obscure about how to deal with its event loop at the low level. So while making our own event loop considering all the explanations at chapter 1 could be a possibility, it may make it more difficult for the usability of modules like `aiohttp` because those modules are focused on `AsyncIO`.
 
 Anyway, with Cython we have the `nogil` functions attribute, that performs tasks outside the Python interpreter and can perform things with real multithreads. And it can be a possibility to try to instance a future object at the start of our functions, return it to the event loop, which will be in the waiting state of the loop until the future has set its value, and after completing the subthread on Cython, set that future value.
 
