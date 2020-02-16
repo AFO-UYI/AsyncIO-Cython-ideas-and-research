@@ -1,0 +1,42 @@
+html{
+    height: 100vh;
+}
+
+body{
+    display: flex;
+    margin: 0px;
+    height: 100%;
+}
+
+nav{
+    background: grey;
+    padding: 10px;
+    height: 100%;
+    box-sizing:border-box;
+}
+
+.activo{
+    background: #00a6ff;
+}
+
+button{
+    padding: 7px;
+    border: none;
+    background: #cecece;
+    cursor: pointer;
+}
+
+#tabla{
+    margin: auto;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+#tabla tr:nth-child(even){
+    background: #b7b7b7;
+}
+
+#tabla td, #tabla th{
+    text-align: center;
+    padding: 2px 20px;
+}

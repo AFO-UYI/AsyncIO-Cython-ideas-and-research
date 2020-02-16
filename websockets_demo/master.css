@@ -1,0 +1,25 @@
+.activo{
+    background: #00a6ff;
+}
+
+button{
+    padding: 10px;
+    border: none;
+    background: #cecece;
+    cursor: pointer;
+}
+
+#tabla{
+    margin: auto;
+    margin-top: 30px;
+    border-collapse: collapse;
+}
+
+#tabla tr:nth-child(even){
+    background: #b7b7b7;
+}
+
+#tabla td, #tabla th{
+    text-align: center;
+    padding: 2px 20px;
+}
