@@ -35,13 +35,14 @@ def register_client(websocket):
 async def notify_cached_info(client):
     msg = {}
     for topic in client.topics:
-        msg.update({topic: cache[topic]})
+        msg.update({topic: cache.get(topic, {})})
 
     await client.ws.send(orjson.dumps(msg).decode('utf-8'))
 
 
 async def listen(client):
     async for command in client.ws:
+        print(command)
         op, portfolio_ids = command.split(' ', 1)
         portfolio_ids = portfolio_ids.split(' ')
         commands_domain[op](client, portfolio_ids)
@@ -72,7 +73,7 @@ def process_new_info(info):
 
 
 async def notify_new_info(info):
-    clients_to_notify = clients_holder.get(info['portfolio']['id'], set())
+    clients_to_notify = clients_holder.get(info['portfolio']['id'], set()).copy()
 
     msg = orjson.dumps({info['portfolio']['id']:
                         {info['reco']['id']: {'id': info['reco']['id'],
@@ -84,7 +85,8 @@ async def notify_new_info(info):
             await client.ws.send(msg)
         except (websockets.exceptions.ConnectionClosedError, websockets.exceptions.ConnectionClosedOK) as e:
             await client.ws.close()
-            clients_holder[client.topics].remove(client)
+            for topic in client.topics:
+                clients_holder[topic].remove(client)
             error_notifier(e)
 
 
@@ -137,9 +139,11 @@ async def run_websocket_server():
 
         for _, clients in clients_holder.items():
             for client in clients:
-                print(client)
-                await client.ws.send('deploying')
-                await client.ws.close()
+                try:
+                    await client.ws.send('deploying')
+                    await client.ws.close()
+                except (websockets.exceptions.ConnectionClosedError, websockets.exceptions.ConnectionClosedOK):
+                    pass
 
     print('todos los clientes avisados de que se va a desplegar una nueva version.')
 

@@ -9,14 +9,9 @@ body{
 }
 
 nav{
-    background: grey;
-    padding: 10px;
+    background: #a2a1a1;
     height: 100%;
     box-sizing:border-box;
-}
-
-.activo{
-    background: #00a6ff;
 }
 
 button{
@@ -39,4 +34,34 @@ button{
 #tabla td, #tabla th{
     text-align: center;
     padding: 2px 20px;
+}
+
+#topics_holder>div{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    box-sizing: border-box;
+    align-items: center;
+}
+
+#topics_holder>div>div{
+    font-size: 20px;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+#topics_holder>div:nth-child(odd){
+    background: #d4d3d3;
+}
+
+#topics_holder button{
+    margin: 5px;
+    background: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
 }
